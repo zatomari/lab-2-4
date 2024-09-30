@@ -15,4 +15,8 @@ public class Word2Root{
         string root = word.GetRoot().ToString();
         word2Root [word.ToString()] = root;
     }
+
+    public string GetRoot(string word){
+        return word2Root[word];
+    }
 }

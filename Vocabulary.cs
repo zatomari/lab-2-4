@@ -26,6 +26,9 @@ public class Vocabulary{
         word2Root.AddWord(word);
     }
 
+    public string GetRoot(string word){
+        return word2Root.GetRoot(word);
+    }
     public static Vocabulary ReadFromFile(string fileName)
     {
         Vocabulary result = new Vocabulary();
