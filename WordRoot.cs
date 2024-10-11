@@ -1,11 +1,10 @@
 // Класс корня
-public class WordRoot : WordPart{
+public class WordRoot : WordPart {
+    public WordRoot() : base() {}
 
-    public WordRoot() : base(){}
+    public WordRoot(string root) : base(root) {}
 
-    public WordRoot(string root) : base(root){}
-
-    public override string Output(){
+    public override string Output() {
         return part[0];
     }
 }
