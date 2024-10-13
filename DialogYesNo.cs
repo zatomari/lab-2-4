@@ -18,6 +18,6 @@ public class DialogYesNo : Dialog {
             nextDialog?.Run(word);
         }
 
-        return true;
+        return false;
     }
 }

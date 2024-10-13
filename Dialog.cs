@@ -1,10 +1,15 @@
 using System.Text.RegularExpressions;
 
-// Класс диалога
+// Абстрактный класс диалога
 public abstract class Dialog {
+
+    // Словарь
     protected Vocabulary vcb;
+    // Объект ввода строки от пользователя
     protected Input input;
+    // Следующий диалог для показа
     protected Dialog? nextDialog;
+
 
     public Dialog(Vocabulary vcb, Input input, Dialog? nextDialog = null) {
         this.vcb = vcb;
@@ -12,9 +17,11 @@ public abstract class Dialog {
         this.nextDialog = nextDialog;
     }
 
+    // Метод запуска диалога
+    // Параметр: введенное слово
     public void Run(String word) {
         while (true) {
-            if (Action(word)) {
+            if (!Action(word)) {
                 break;
             }
         }

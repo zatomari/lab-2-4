@@ -1,13 +1,15 @@
 
-// Класс диалога
+// Класс основного диалога
 public class DialogMain : Dialog {
     public DialogMain(Vocabulary vcb) : base(
         vcb,
         new Input(
             "> ",
+            // Проверка на кириллицу или q
             (text) => Input.IsCyrillic(text) || text == "q",
             "Введите русское слово или q"
         ),
+        // Диалог подтверждения ввода в словарь
         new DialogYesNo(vcb)
     ) {
     }
@@ -16,18 +18,21 @@ public class DialogMain : Dialog {
         word = input.Single();
 
         if (word == "q") {
-            return true;
-        } else if (word == "") {
+            // выход из программы
             return false;
+        } else if (word == "") {
+            // если пустая строка, то переходим опять в режим ввода слова
+            return true;
         }
+
 
         if (vcb.Has(word)) {
             Console.WriteLine("Известные однокоренные слова:");
             vcb.OutputKnownWords(word);
-            return false;
+            return true;
         } else {
             nextDialog?.Run(word);
-            return false;
+            return true;
         }
     }
 }

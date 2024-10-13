@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-// Класс диалога
+// Контейнер для поля ввода. Содержит в себе пояснительную строку prompt, выражение isValidInput для проверки на правильность введенного, сообщение invalidInputString, на случай если введено неправильно
 public class Input {
     private static Regex isCyrillic = new Regex(@"[а-яА-Я]+");
 
@@ -24,8 +24,11 @@ public class Input {
         return isCyrillic.IsMatch(text);
     }
 
+    // Делегат для лямбда выражения, вид которого будет указан в момент создания
     public delegate bool IsValidInput(String text);
 
+
+    // Метод для ввода одного значения (слово, корень, окончание). Если required указан, то ввод элемента обязателен, в противном случае может быть пустой строкой
     public String Single(String? required = null) {
         String? result;
 
@@ -40,11 +43,11 @@ public class Input {
                 result = "";
             }
 
+            // Если required указан, а пользователь ввел пустое, то будем идти по циклу, пока пользоватеь не введет нужное
             if (required != null && result == "") {
-                // и идём опять по циклу
                 Console.WriteLine(required);
             } else if (!isValidInput(result)) {
-                // и идём опять по циклу
+                // Если опять введено неправильно, показываем это и заставляем вводить снова
                 Console.WriteLine(invalidInputString);
             } else {
                 return result;
@@ -52,12 +55,14 @@ public class Input {
         }
     }
 
-    public String[] Many(String? required = null) {
+    // Метод для ввода множества значений (приставка, суффикс). В результате возвращается массив, состоящий из введённых значений
+
+    public String[] Many() {
         List<String> result = new List<String>();
         String item;
 
         while (true) {
-            item = Single(required);
+            item = Single();
 
             if (item == "") {
                 return result.ToArray();
