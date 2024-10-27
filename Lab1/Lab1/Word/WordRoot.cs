@@ -2,8 +2,6 @@ namespace Lab1.Word;
 
 // Класс корня
 public class WordRoot : WordPart {
-    public WordRoot() : base() {}
-
     public WordRoot(string root) : base(root) {}
 
     public override string Output() {
