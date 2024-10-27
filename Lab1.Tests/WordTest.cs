@@ -32,17 +32,17 @@ public class WordTest {
             new Word(
                 new WordPrefix("рас"),
                 new WordRoot("сказ"),
-                new WordSuffix(""),
-                new WordEnding("")
+                new WordSuffix(),
+                new WordEnding()
             ).Output()
         );
 
                 Assert.AreEqual(
             "сказ-ы",
             new Word(
-                new WordPrefix(""),
+                new WordPrefix(),
                 new WordRoot("сказ"),
-                new WordSuffix(""),
+                new WordSuffix(),
                 new WordEnding("ы")
             ).Output()
         );
@@ -65,8 +65,8 @@ public class WordTest {
             new Word(
                 new WordPrefix("рас"),
                 new WordRoot("сказ"),
-                new WordSuffix(""),
-                new WordEnding("")
+                new WordSuffix(),
+                new WordEnding()
             ).Serialize()
         );
 
@@ -74,9 +74,9 @@ public class WordTest {
         Assert.AreEqual(
             ";сказ;;ы",
             new Word(
-                new WordPrefix(""),
+                new WordPrefix(),
                 new WordRoot("сказ"),
-                new WordSuffix(""),
+                new WordSuffix(),
                 new WordEnding("ы")
             ).Serialize()
         );
