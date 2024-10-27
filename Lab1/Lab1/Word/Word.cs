@@ -47,7 +47,7 @@ public class Word : IComparable<Word> {
         return stringBuilder.ToString();
     }
 
-    public override string ToString(){
+    public override string ToString() {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.Append(prefix.ToString());

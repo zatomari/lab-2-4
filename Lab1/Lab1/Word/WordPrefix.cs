@@ -12,11 +12,18 @@ public class WordPrefix : WordPart {
 
     // приставка1-приставка2-
     public override string Output() {
+        // префикса нет
+        if (part.Length == 0) {
+            return "";
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < part.Length; i++) {
-            stringBuilder.Append(part[i]);
-            stringBuilder.Append('-');
+            if (part[i] != "") {
+                stringBuilder.Append(part[i]);
+                stringBuilder.Append('-');
+            }
         }
 
         return stringBuilder.ToString();

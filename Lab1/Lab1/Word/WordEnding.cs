@@ -8,6 +8,11 @@ public class WordEnding : WordPart {
 
     // -окончание
     public override string Output() {
+        // окончания нет
+        if (part.Length == 0) {
+            return "";
+        }
+
         return !string.IsNullOrEmpty(part[0]) ? "-" + part[0] : "";
     }
 }

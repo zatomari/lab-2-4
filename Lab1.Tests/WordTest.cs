@@ -6,14 +6,14 @@ using Lab1.Word;
 public class WordTest {
     [TestMethod]
     public void WordOutput() {
-        // НЕПРАВИЛЬНО
+
         Assert.AreEqual(
-            "-сказ-",
+            "сказ",
             new Word(
-                new WordPrefix(""),
+                new WordPrefix(),
                 new WordRoot("сказ"),
-                new WordSuffix(""),
-                new WordEnding("")
+                new WordSuffix(),
+                new WordEnding()
             ).Output()
         );
 
