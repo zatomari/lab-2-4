@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 
 // Контейнер для поля ввода. Содержит в себе пояснительную строку prompt, выражение isValidInput для проверки на правильность введенного, сообщение invalidInputString, на случай если введено неправильно
+// Обрабатывает данные, вводимые пользователем с помощью isValidInput
 public class Input {
     private static Regex isCyrillic = new Regex(@"[а-яА-Я]+");
 

@@ -1,4 +1,5 @@
 
+// пропущен неймспейс
 // Класс основного диалога
 public class DialogMain : Dialog {
     public DialogMain(Vocabulary vcb) : base(

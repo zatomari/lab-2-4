@@ -1,4 +1,5 @@
 // Класс словаря
+// solid - s ?
 public class Vocabulary {
     // Dictionary слово-корень
     private Word2Root word2Root;
@@ -29,6 +30,7 @@ public class Vocabulary {
         return word2Root.GetRoot(word);
     }
 
+// *
     public async Task ReadFromFile(string fileName) {
         using (StreamReader reader = new StreamReader(fileName)) {
             while (!reader.EndOfStream) {
@@ -48,6 +50,7 @@ public class Vocabulary {
         }
     }
 
+    // *  (а так же подумать почему нужно минимум 2 интерфейса в этом замечательном приложении)
     public async Task SaveToFile(string fileName) {
         using (StreamWriter writer = new StreamWriter(fileName)) {
             foreach (List<Word> words in root2Words.GetDictionary().Values) {
@@ -58,13 +61,16 @@ public class Vocabulary {
         }
     }
 
-    public void OutputKnownWords(String input) {
+    public IReadOnlyCollection<Word> OutputKnownWords(String input) {
         Word[] words = GetWords(GetRoot(input));
 
         Array.Sort(words);
 
-        foreach (Word word in words){
+       /* foreach (Word word in words){
             Console.WriteLine(word.Output());
-        }
+        }*/
+        return words;
     }
 }
+
+// * смотри строчку 2

@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 
+// пропущен неймспейс
 // Абстрактный класс диалога
 public abstract class Dialog {
 
