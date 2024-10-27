@@ -7,10 +7,10 @@ public class Program {
 
         Vocabulary vcb = new Vocabulary();
 
-        await VocabularyManager.ReadVocabularyFromFile(vcb, fileName);
+        await VocabularyManager.Read(vcb, new StreamReader(fileName));
 
         new DialogMain(vcb).Run("");
 
-        await VocabularyManager.SaveVocabularyToFile(vcb, fileName);
+        await VocabularyManager.Write(vcb, new StreamWriter(fileName));
     }
 }

@@ -4,13 +4,13 @@ using Lab1.Word;
 
 // Класс менеджера словаря, загружает и сохраняет словарь в файл
 public class VocabularyManager {
-    public static async Task ReadVocabularyFromFile(Vocabulary vcb, string fileName) {
-        using (StreamReader reader = new StreamReader(fileName)) {
-            while (!reader.EndOfStream) {
-                String? line = await reader.ReadLineAsync();
-                if (line == null) continue;
+    public static async Task Read(Vocabulary vcb, TextReader reader) {
+        String? line;
 
+        using (reader) {
+            while ((line = await reader.ReadLineAsync()) != null) {
                 string[] parts = line.Split(';');
+
                 if (parts.Length == 4) {
                     vcb.AddWord(new Word(
                         new WordPrefix(parts[0] == "" ? Array.Empty<string>() : parts[0].Split(',')),
@@ -24,8 +24,8 @@ public class VocabularyManager {
     }
 
     // *  (а так же подумать почему нужно минимум 2 интерфейса в этом замечательном приложении)
-    public static async Task SaveVocabularyToFile(Vocabulary vcb, string fileName) {
-        using (StreamWriter writer = new StreamWriter(fileName)) {
+    public static async Task Write(Vocabulary vcb, TextWriter writer) {
+        using (writer) {
             foreach (List<Word> words in vcb.root2Words.GetDictionary().Values) {
                 foreach (Word word in words) {
                     await writer.WriteLineAsync(word.Serialize());
