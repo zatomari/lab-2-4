@@ -1,3 +1,8 @@
+namespace Lab1.Dialog;
+
+using Lab1.Input;
+using Lab1.Vocabulary;
+
 // Класс диалога
 public class DialogYesNo : Dialog {
     public DialogYesNo(Vocabulary vcb) : base(

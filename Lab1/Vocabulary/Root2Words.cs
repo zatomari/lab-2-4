@@ -1,4 +1,6 @@
-using System.Text;
+namespace Lab1.Vocabulary;
+
+using Lab1.Word;
 
 // Класс словарь вида корень-список слов
 public class Root2Words {

@@ -1,4 +1,9 @@
-// пропущен неймспейс
+namespace Lab1.Dialog;
+
+using Lab1.Input;
+using Lab1.Vocabulary;
+using Lab1.Word;
+
 // Класс диалога для добавления слова в словарь
 public class DialogNewWord : Dialog {
 
@@ -11,7 +16,6 @@ public class DialogNewWord : Dialog {
         )
     ) {
     }
-
 
     protected override bool Action(String word) {
         input.setPrompt("приставка: ");

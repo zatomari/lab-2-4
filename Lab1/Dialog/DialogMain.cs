@@ -1,5 +1,8 @@
+namespace Lab1.Dialog;
 
-// пропущен неймспейс
+using Lab1.Input;
+using Lab1.Vocabulary;
+
 // Класс основного диалога
 public class DialogMain : Dialog {
     public DialogMain(Vocabulary vcb) : base(

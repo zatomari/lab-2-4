@@ -1,3 +1,5 @@
+namespace Lab1.Word;
+
 // Класс корня
 public class WordRoot : WordPart {
     public WordRoot() : base() {}

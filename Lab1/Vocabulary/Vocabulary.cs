@@ -1,3 +1,7 @@
+namespace Lab1.Vocabulary;
+
+using Lab1.Word;
+
 // Класс словаря
 // solid - s ?
 public class Vocabulary {

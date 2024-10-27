@@ -1,3 +1,5 @@
+namespace Lab1.Word;
+
 using System.Text;
 
 // Класс суффикса

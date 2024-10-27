@@ -1,6 +1,9 @@
-using System.Text.RegularExpressions;
+namespace Lab1.Dialog;
 
-// пропущен неймспейс
+using Lab1.Input;
+using Lab1.Vocabulary;
+using Lab1.Word;
+
 // Абстрактный класс диалога
 public abstract class Dialog {
 

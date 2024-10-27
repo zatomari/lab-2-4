@@ -1,3 +1,7 @@
+namespace Lab1.Vocabulary;
+
+using Lab1.Word;
+
 // Класс словарь вида слово-корень
 public class Word2Root{
     private Dictionary<string, string> word2Root;

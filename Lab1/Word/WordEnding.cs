@@ -1,3 +1,5 @@
+namespace Lab1.Word;
+
 // Класс окончания
 public class WordEnding : WordPart {
 

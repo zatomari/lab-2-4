@@ -1,3 +1,5 @@
+namespace Lab1.Input;
+
 using System.Text.RegularExpressions;
 
 // Контейнер для поля ввода. Содержит в себе пояснительную строку prompt, выражение isValidInput для проверки на правильность введенного, сообщение invalidInputString, на случай если введено неправильно
