@@ -32,7 +32,6 @@ public class DialogMain : Dialog {
             return true;
         }
 
-
         if (vcb.Has(word)) {
             Console.WriteLine("Известные однокоренные слова:");
             vcb.OutputKnownWords(word);

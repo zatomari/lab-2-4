@@ -30,7 +30,6 @@ public class Input {
     // Делегат для лямбда выражения, вид которого будет указан в момент создания
     public delegate bool IsValidInput(String text);
 
-
     // Метод для ввода одного значения (слово, корень, окончание). Если required указан, то ввод элемента обязателен, в противном случае может быть пустой строкой
     public String Single(String? required = null) {
         String? result;
@@ -59,7 +58,6 @@ public class Input {
     }
 
     // Метод для ввода множества значений (приставка, суффикс). В результате возвращается массив, состоящий из введённых значений
-
     public String[] Many() {
         List<String> result = new List<String>();
         String item;

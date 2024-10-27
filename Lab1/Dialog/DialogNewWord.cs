@@ -6,7 +6,6 @@ using Lab1.Word;
 
 // Класс диалога для добавления слова в словарь
 public class DialogNewWord : Dialog {
-
     public DialogNewWord(Vocabulary vcb) : base(
         vcb,
         new Input(

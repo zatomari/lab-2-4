@@ -2,18 +2,15 @@ namespace Lab1.Dialog;
 
 using Lab1.Input;
 using Lab1.Vocabulary;
-using Lab1.Word;
 
 // Абстрактный класс диалога
 public abstract class Dialog {
-
     // Словарь
     protected Vocabulary vcb;
     // Объект ввода строки от пользователя
     protected Input input;
     // Следующий диалог для показа
     protected Dialog? nextDialog;
-
 
     public Dialog(Vocabulary vcb, Input input, Dialog? nextDialog = null) {
         this.vcb = vcb;
