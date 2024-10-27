@@ -23,7 +23,6 @@ public class VocabularyManager {
         }
     }
 
-    // *  (а так же подумать почему нужно минимум 2 интерфейса в этом замечательном приложении)
     public static async Task Write(Vocabulary vcb, TextWriter writer) {
         using (writer) {
             foreach (List<Word> words in vcb.root2Words.GetDictionary().Values) {
