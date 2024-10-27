@@ -16,6 +16,9 @@ public class DialogMain : Dialog {
         // Диалог подтверждения ввода в словарь
         new DialogYesNo(vcb)
     ) {
+        Console.WriteLine("Словарь однокоренных слов");
+        Console.WriteLine("----------------------------");
+        Console.WriteLine("Введите слово или q для завершения работы");
     }
 
     protected override bool Action(String word) {

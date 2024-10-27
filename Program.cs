@@ -9,10 +9,6 @@ public class Program {
 
         await vcb.ReadFromFile(fileName);
 
-        Console.WriteLine("Словарь однокоренных слов"); // move to some dialog
-        Console.WriteLine("----------------------------");
-        Console.WriteLine("Введите слово или q для завершения работы");
-
         new DialogMain(vcb).Run("");
 
         await vcb.SaveToFile(fileName);
