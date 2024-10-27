@@ -2,6 +2,7 @@ namespace Lab1.Dialog;
 
 using Lab1.Input;
 using Lab1.Vocabulary;
+using Lab1.Word;
 
 // Класс основного диалога
 public class DialogMain : Dialog {
@@ -33,8 +34,14 @@ public class DialogMain : Dialog {
         }
 
         if (vcb.Has(word)) {
+            IReadOnlyCollection<Word> words = vcb.GetKnownWords(word);
+
             Console.WriteLine("Известные однокоренные слова:");
-            vcb.OutputKnownWords(word);
+
+            foreach (Word w in words) {
+                Console.WriteLine(w.Output());
+            }
+
             return true;
         } else {
             nextDialog?.Run(word);

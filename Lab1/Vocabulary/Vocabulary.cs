@@ -65,14 +65,11 @@ public class Vocabulary {
         }
     }
 
-    public IReadOnlyCollection<Word> OutputKnownWords(String input) {
+    public IReadOnlyCollection<Word> GetKnownWords(String input) {
         Word[] words = GetWords(GetRoot(input));
 
         Array.Sort(words);
 
-       /* foreach (Word word in words){
-            Console.WriteLine(word.Output());
-        }*/
         return words;
     }
 }
