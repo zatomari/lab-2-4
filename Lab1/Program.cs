@@ -7,10 +7,26 @@ public class Program {
 
         Vocabulary vcb = new Vocabulary();
 
-        await VocabularyManager.Read(vcb, new StreamReader(fileName));
+        try {
+            StreamReader reader = new StreamReader(fileName);
+
+            await VocabularyManager.Read(vcb, reader);
+        } catch (Exception e) {
+            Console.WriteLine("\nUnable to read data from file " + fileName + "\nExiting…\n");
+            // Console.WriteLine(e);
+            return;
+        }
 
         new DialogMain(vcb).Run("");
 
-        await VocabularyManager.Write(vcb, new StreamWriter(fileName));
+        try {
+            StreamWriter writer = new StreamWriter(fileName);
+
+            await VocabularyManager.Write(vcb, writer);
+        } catch (Exception e) {
+            Console.WriteLine("\nUnable to write data to file " + fileName + "\nExiting…\n");
+            // Console.WriteLine(e);
+            return;
+        }
     }
 }
