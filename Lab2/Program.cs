@@ -1,5 +1,5 @@
-﻿using Lab1.Dialog;
-using Lab1.Vocabulary;
+﻿using Lab2.Dialog;
+using Lab2.Vocabulary;
 
 public class Program {
     public static async Task Main(string[] args) {

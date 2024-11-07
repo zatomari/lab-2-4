@@ -1,6 +1,6 @@
-namespace Lab1.Tests;
+namespace Lab2.Tests;
 
-using Lab1.Word;
+using Lab2.Word;
 
 [TestClass]
 public class WordTest {

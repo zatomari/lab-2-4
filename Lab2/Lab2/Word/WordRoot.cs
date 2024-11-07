@@ -1,4 +1,4 @@
-namespace Lab1.Word;
+namespace Lab2.Word;
 
 // Класс корня
 public class WordRoot : WordPart {

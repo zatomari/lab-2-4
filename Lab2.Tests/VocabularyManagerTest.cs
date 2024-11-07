@@ -1,9 +1,9 @@
-namespace Lab1.Tests;
+namespace Lab2.Tests;
 
 using System.Text;
 
-using Lab1.Word;
-using Lab1.Vocabulary;
+using Lab2.Word;
+using Lab2.Vocabulary;
 
 [TestClass]
 public class VocabularyManagerTest {

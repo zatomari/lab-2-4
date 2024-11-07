@@ -1,7 +1,7 @@
-namespace Lab1.Dialog;
+namespace Lab2.Dialog;
 
-using Lab1.Input;
-using Lab1.Vocabulary;
+using Lab2.Input;
+using Lab2.Vocabulary;
 
 // Абстрактный класс диалога
 public abstract class Dialog {

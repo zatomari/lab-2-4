@@ -1,6 +1,6 @@
-namespace Lab1.Vocabulary;
+namespace Lab2.Vocabulary;
 
-using Lab1.Word;
+using Lab2.Word;
 
 // Класс словаря
 public class Vocabulary {
