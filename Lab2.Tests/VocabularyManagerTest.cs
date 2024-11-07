@@ -1,7 +1,5 @@
 namespace Lab2.Tests;
 
-using System.Text;
-
 using Lab2.Word;
 using Lab2.Vocabulary;
 

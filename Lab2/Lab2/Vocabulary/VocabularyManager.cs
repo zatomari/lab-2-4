@@ -4,6 +4,32 @@ using Lab2.Word;
 
 // Класс менеджера словаря, загружает и сохраняет словарь в файл
 public class VocabularyManager {
+    private const string fileName = "Dictionary.csv";
+
+    public static async Task Read(Vocabulary vcb) {
+        try {
+            StreamReader reader = new StreamReader(fileName);
+
+            await Read(vcb, reader);
+        } catch (Exception e) {
+            Console.WriteLine("\nUnable to read data from file " + fileName + "\nExiting…\n");
+            Console.WriteLine(e);
+            return;
+        }
+    }
+
+    public static async Task Write(Vocabulary vcb) {
+        try {
+            StreamWriter writer = new StreamWriter(fileName);
+
+            await Write(vcb, writer);
+        } catch (Exception e) {
+            Console.WriteLine("\nUnable to write data to file " + fileName + "\nExiting…\n");
+            Console.WriteLine(e);
+            return;
+        }
+    }
+
     public static async Task Read(Vocabulary vcb, TextReader reader) {
         String? line;
 
