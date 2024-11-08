@@ -70,53 +70,78 @@ public class WordTest {
     [TestMethod]
     public void WordSerialize() {
         Assert.AreEqual(
-            "пере,при;сказ;к;а",
+            new WordDb(
+                "пере,при",
+                "сказ",
+                "к",
+                "а"
+            ).ToString(),
             new Word(
                 new WordPrefix(["пере", "при"]),
                 new WordRoot("сказ"),
                 new WordSuffix("к"),
                 new WordEnding("а")
-            ).Serialize()
+            ).Serialize().ToString()
         );
 
         Assert.AreEqual(
-            ";сказ;оч,н,ик;",
+            new WordDb(
+                "",
+                "сказ",
+                "оч,н,ик",
+                ""
+            ).ToString(),
             new Word(
                 new WordPrefix(),
                 new WordRoot("сказ"),
                 new WordSuffix(["оч", "н", "ик"]),
                 new WordEnding()
-            ).Serialize()
+            ).Serialize().ToString()
         );
 
         Assert.AreEqual(
-            "при;сказ;к;а",
+            new WordDb(
+                "при",
+                "сказ",
+                "к",
+                "а"
+            ).ToString(),
             new Word(
                 new WordPrefix("при"),
                 new WordRoot("сказ"),
                 new WordSuffix("к"),
                 new WordEnding("а")
-            ).Serialize()
+            ).Serialize().ToString()
         );
 
         Assert.AreEqual(
-            "рас;сказ;;",
+            new WordDb(
+                "рас",
+                "сказ",
+                "",
+                ""
+            ).ToString(),
             new Word(
                 new WordPrefix("рас"),
                 new WordRoot("сказ"),
                 new WordSuffix(),
                 new WordEnding()
-            ).Serialize()
+            ).Serialize().ToString()
         );
 
         Assert.AreEqual(
-            ";сказ;;ы",
+            new WordDb(
+                "",
+                "сказ",
+                "",
+                "ы"
+            ).ToString(),
             new Word(
                 new WordPrefix(),
                 new WordRoot("сказ"),
                 new WordSuffix(),
                 new WordEnding("ы")
-            ).Serialize()
+            ).Serialize().ToString()
         );
     }
 }

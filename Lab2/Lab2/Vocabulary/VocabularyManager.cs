@@ -1,60 +1,53 @@
 namespace Lab2.Vocabulary;
 
 using Lab2.Word;
+using Microsoft.EntityFrameworkCore;
 
-// Класс менеджера словаря, загружает и сохраняет словарь в файл
+// Класс менеджера словаря, загружает и сохраняет словарь
 public class VocabularyManager {
-    private const string fileName = "Dictionary.csv";
+    private const string dbName = "Dictionary.db";
 
     public static async Task Read(Vocabulary vcb) {
-        try {
-            StreamReader reader = new StreamReader(fileName);
+        VocabularyContext context = new VocabularyContext(dbName);
 
-            await Read(vcb, reader);
-        } catch (Exception e) {
-            Console.WriteLine("\nUnable to read data from file " + fileName + "\nExiting…\n");
-            Console.WriteLine(e);
-            return;
+        context.Database.EnsureCreated();
+
+        var words = await context.Words.ToListAsync();
+
+        foreach (var wordDb in words) {
+            vcb.AddWord(new Word(
+                new WordPrefix(WordPart.Deserialize(wordDb.Prefix)),
+                new WordRoot(wordDb.Root),
+                new WordSuffix(WordPart.Deserialize(wordDb.Suffix)),
+                new WordEnding(wordDb.Ending)
+            ));
         }
     }
 
     public static async Task Write(Vocabulary vcb) {
-        try {
-            StreamWriter writer = new StreamWriter(fileName);
+        VocabularyContext context = new VocabularyContext(dbName);
 
-            await Write(vcb, writer);
-        } catch (Exception e) {
-            Console.WriteLine("\nUnable to write data to file " + fileName + "\nExiting…\n");
-            Console.WriteLine(e);
-            return;
-        }
-    }
+        using (var transaction = await context.Database.BeginTransactionAsync()) {
+            try {
+                foreach (List<Word> words in vcb.root2Words.GetDictionary().Values) {
+                    foreach (Word word in words) {
+                        WordDb wordDb = word.Serialize();
+                        var existingWord = await context.Words.FirstOrDefaultAsync(w => w.Id == wordDb.Id);
 
-    public static async Task Read(Vocabulary vcb, TextReader reader) {
-        String? line;
-
-        using (reader) {
-            while ((line = await reader.ReadLineAsync()) != null) {
-                string[] parts = line.Split(';');
-
-                if (parts.Length == 4) {
-                    vcb.AddWord(new Word(
-                        new WordPrefix(parts[0] == "" ? Array.Empty<string>() : parts[0].Split(',')),
-                        new WordRoot(parts[1]),
-                        new WordSuffix(parts[2] == "" ? Array.Empty<string>() : parts[2].Split(',')),
-                        new WordEnding(parts[3])
-                    ));
+                        if (existingWord != null) {
+                            context.Entry(existingWord).CurrentValues.SetValues(wordDb);
+                        } else {
+                            await context.Words.AddAsync(wordDb);
+                        }
+                    }
                 }
-            }
-        }
-    }
 
-    public static async Task Write(Vocabulary vcb, TextWriter writer) {
-        using (writer) {
-            foreach (List<Word> words in vcb.root2Words.GetDictionary().Values) {
-                foreach (Word word in words) {
-                    await writer.WriteLineAsync(word.Serialize());
-                }
+                await context.SaveChangesAsync();
+                await transaction.CommitAsync();
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+                await transaction.RollbackAsync();
+                throw;
             }
         }
     }

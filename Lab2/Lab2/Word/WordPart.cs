@@ -1,12 +1,15 @@
 namespace Lab2.Word;
 
 using System.Text;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 // Абстрактный класс словообразующей части.
 // Каждая часть слова может быть одна (корень, окончание),
 // или несколько (приставки, суффиксы).
 // Части слова одного типа хранятся в массиве part
 public abstract class WordPart {
+    private static readonly string PARTS_DELIMITER = ",";
+
     protected string[] part;
 
     public WordPart() {
@@ -28,11 +31,15 @@ public abstract class WordPart {
 
         for (int i = 0; i < part.Length; i++) {
             if (i != 0) {
-                stringBuilder.Append(',');
+                stringBuilder.Append(PARTS_DELIMITER);
             }
             stringBuilder.Append(part[i]);
         }
         return stringBuilder.ToString();
+    }
+
+    public static string[] Deserialize(string input) {
+        return input.Split(PARTS_DELIMITER);
     }
 
     public string[] GetPart() {

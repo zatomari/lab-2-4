@@ -32,19 +32,13 @@ public class Word : IComparable<Word> {
         return stringBuilder.ToString();
     }
 
-    // приставка1,приставка2;корень;суффикс1,суффкс2;окончание
-    public string Serialize() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.Append(prefix.Serialize());
-        stringBuilder.Append(';');
-        stringBuilder.Append(root.Serialize());
-        stringBuilder.Append(';');
-        stringBuilder.Append(suffix.Serialize());
-        stringBuilder.Append(';');
-        stringBuilder.Append(ending.Serialize());
-
-        return stringBuilder.ToString();
+    public WordDb Serialize() {
+        return new WordDb(
+            prefix.Serialize(), // приставка1,приставка2
+            root.Serialize(),   // корень
+            suffix.Serialize(), // суффикс1,суффикс2
+            ending.Serialize()  // окончание
+        );
     }
 
     public override string ToString() {
