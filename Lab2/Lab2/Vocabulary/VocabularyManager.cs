@@ -36,9 +36,7 @@ public class VocabularyManager {
                         WordDb wordDb = word.Serialize();
                         var existingWord = await context.Words.FirstOrDefaultAsync(w => w.Id == wordDb.Id);
 
-                        if (existingWord != null) {
-                            context.Entry(existingWord).CurrentValues.SetValues(wordDb);
-                        } else {
+                        if (existingWord == null) {
                             await context.Words.AddAsync(wordDb);
                         }
                     }
