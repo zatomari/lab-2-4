@@ -12,10 +12,11 @@ public class WordDb {
     public string Ending { get; private set; }
 
     public WordDb(string prefix, String root, String suffix, String ending) {
+        Id = prefix.Replace(",", "") + root + suffix.Replace(",", "") + ending;
+
         Prefix = prefix;
         Root = root;
         Suffix = suffix;
         Ending = ending;
-        Id = prefix + root + suffix + ending;
     }
 }
