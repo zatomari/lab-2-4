@@ -7,9 +7,13 @@ using Microsoft.EntityFrameworkCore;
 public class VocabularyManager {
     private const string dbName = "Dictionary.db";
 
-    public static async Task Read(Vocabulary vcb) {
-        VocabularyContext context = new VocabularyContext(dbName);
+    private VocabularyContext context;
 
+    public VocabularyManager() {
+        context = new VocabularyContext(dbName);
+    }
+
+    public async Task Read(Vocabulary vcb) {
         context.Database.EnsureCreated();
 
         var words = await context.Words.ToListAsync();
@@ -24,9 +28,7 @@ public class VocabularyManager {
         }
     }
 
-    public static async Task Write(Vocabulary vcb) {
-        VocabularyContext context = new VocabularyContext(dbName);
-
+    public async Task Write(Vocabulary vcb) {
         using (var transaction = await context.Database.BeginTransactionAsync()) {
             try {
                 foreach (List<Word> words in vcb.root2Words.GetDictionary().Values) {
