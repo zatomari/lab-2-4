@@ -33,6 +33,7 @@ public class Vocabulary {
         return word2Root.GetRoot(word);
     }
 
+
     public IReadOnlyCollection<Word> GetKnownWords(String root) {
         Word[] words = GetWords(GetRoot(root));
 

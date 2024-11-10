@@ -25,7 +25,7 @@ public abstract class WordPart {
         this.part = part;
     }
 
-    // метод перевода частей слова в строку для записи в файл
+    // метод перевода частей слова в строку для записи в БД
     public string Serialize() {
         StringBuilder stringBuilder = new StringBuilder();
 
