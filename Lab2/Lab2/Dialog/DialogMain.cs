@@ -22,7 +22,7 @@ public class DialogMain : Dialog {
         Console.WriteLine("Введите слово или q для завершения работы");
     }
 
-    protected override bool Action(String word) {
+    protected override async Task<bool> Action(String word) {
         word = input.Single();
 
         if (word == "q") {
@@ -33,8 +33,8 @@ public class DialogMain : Dialog {
             return true;
         }
 
-        if (vcb.Has(word)) {
-            IReadOnlyCollection<Word> words = vcb.GetKnownWords(word);
+        if (await vcb.Has(word)) {
+            Word[] words = await vcb.GetKnownWords(word);
 
             Console.WriteLine("Известные однокоренные слова:");
 
@@ -44,7 +44,9 @@ public class DialogMain : Dialog {
 
             return true;
         } else {
-            nextDialog?.Run(word);
+            if (nextDialog != null) {
+                await nextDialog.Run(word);
+            }
             return true;
         }
     }

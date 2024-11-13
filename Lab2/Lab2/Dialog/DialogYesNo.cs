@@ -16,13 +16,13 @@ public class DialogYesNo : Dialog {
     ) {
     }
 
-    protected override bool Action(String word) {
+    protected override Task<bool> Action(String word) {
         String yesOrNo = input.Single();
 
         if (yesOrNo == "y") {
             nextDialog?.Run(word);
         }
 
-        return false;
+        return Task.FromResult(false);
     }
 }

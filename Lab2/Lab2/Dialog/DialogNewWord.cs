@@ -16,7 +16,7 @@ public class DialogNewWord : Dialog {
     ) {
     }
 
-    protected override bool Action(String word) {
+    protected override Task<bool> Action(String word) {
         input.setPrompt("приставка: ");
         String[] prefix = input.Many();
 
@@ -41,10 +41,10 @@ public class DialogNewWord : Dialog {
         if (word == newWord.ToString()) {
             vcb.AddWord(newWord);
             Console.WriteLine($"Слово “{newWord}“ добавлено");
-            return false;
+            return Task.FromResult(false);
         }
 
         Console.WriteLine($"Слово “{word}“ не соответствует введёному по частям “{newWord}“");
-        return true;
+        return Task.FromResult(true);
     }
 }

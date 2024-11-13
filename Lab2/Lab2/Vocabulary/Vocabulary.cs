@@ -1,41 +1,79 @@
 namespace Lab2.Vocabulary;
 
 using Lab2.Word;
+using Microsoft.EntityFrameworkCore;
 
 // Класс словаря
 public class Vocabulary {
-    // Dictionary слово-корень
-    internal Word2Root word2Root;
+    private const string dbName = "Dictionary.db";
 
-    // Dictionary корень-список слов
-    internal Root2Words root2Words;
+    private VocabularyContext context;
 
-    public Vocabulary() {
-        word2Root = new Word2Root();
-        root2Words = new Root2Words();
+    public Vocabulary(bool isClean = false) {
+        context = new VocabularyContext(dbName);
+
+        if (isClean) {
+            context.Database.EnsureDeleted();
+        }
+
+        context.Database.EnsureCreated();
     }
 
     // есть ли слово в словаре
-    public bool Has(string word) {
-        return word2Root.Has(word);
+    public async Task<bool> Has(string word) {
+        return await context.Words.FirstOrDefaultAsync(w => w.Id == word) != null;
     }
 
-    public Word[] GetWords(string root) {
-        return root2Words.GetWords(root);
+    public async Task<Word[]> GetWords(string root) {
+        var words = await context.Words.Where(w => w.Root == root).ToListAsync();
+        List<Word> result = new List<Word>();
+
+        foreach (var wordDb in words) {
+            result.Add(new Word(
+                new WordPrefix(WordPart.Deserialize(wordDb.Prefix)),
+                new WordRoot(wordDb.Root),
+                new WordSuffix(WordPart.Deserialize(wordDb.Suffix)),
+                new WordEnding(wordDb.Ending)
+            ));
+        }
+
+        return result.ToArray();
     }
 
-    public void AddWord(Word word) {
-        root2Words.AddWord(word);
-        word2Root.AddWord(word);
+    public async void AddWord(Word word) {
+        WordDb wordDb = word.Serialize();
+        var existingWord = await context.Words.FirstOrDefaultAsync(w => w.Id == wordDb.Id);
+
+        if (existingWord != null) {
+            return;
+        }
+
+        using (var transaction = await context.Database.BeginTransactionAsync()) {
+            try {
+                await context.Words.AddAsync(wordDb);
+
+                await context.SaveChangesAsync();
+                await transaction.CommitAsync();
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
     }
 
-    public string GetRoot(string word) {
-        return word2Root.GetRoot(word);
+    public async Task<string> GetRoot(string word) {
+        var existingWord = await context.Words.FirstOrDefaultAsync(w => w.Id == word);
+
+        if (existingWord == null) {
+            return "";
+        }
+
+        return existingWord.Root;
     }
 
-
-    public IReadOnlyCollection<Word> GetKnownWords(String root) {
-        Word[] words = GetWords(GetRoot(root));
+    public async Task<Word[]> GetKnownWords(String word) {
+        Word[] words = await GetWords(await GetRoot(word));
 
         Array.Sort(words);
 

@@ -20,13 +20,13 @@ public abstract class Dialog {
 
     // Метод запуска диалога
     // Параметр: введенное слово
-    public void Run(String word) {
+    public async Task Run(String word) {
         while (true) {
-            if (!Action(word)) {
+            if (!await Action(word)) {
                 break;
             }
         }
     }
 
-    protected abstract bool Action(String text);
+    protected abstract Task<bool> Action(String text);
 }

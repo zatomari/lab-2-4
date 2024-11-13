@@ -6,8 +6,9 @@ using Lab2.Vocabulary;
 [TestClass]
 public class VocabularyTest {
     [TestMethod]
-    public void Has() {
-        Vocabulary vcb = new Vocabulary();
+    public async Task Has() {
+        Vocabulary vcb = new Vocabulary(true);
+
         vcb.AddWord(
             new Word(
                 new WordPrefix("при"),
@@ -17,12 +18,13 @@ public class VocabularyTest {
             )
         );
 
-        Assert.IsTrue(vcb.Has("присказка"));
+        Assert.IsTrue(await vcb.Has("присказка"));
     }
 
     [TestMethod]
-    public void GetWords() {
-        Vocabulary vcb = new Vocabulary();
+    public async Task GetWords() {
+        Vocabulary vcb = new Vocabulary(true);
+
         vcb.AddWord(
             new Word(
                 new WordPrefix("при"),
@@ -32,14 +34,15 @@ public class VocabularyTest {
             )
         );
 
-        Word[] words = vcb.GetWords("сказ");
+        Word[] words = await vcb.GetWords("сказ");
         Assert.IsTrue(words.Length == 1);
         Assert.IsTrue(words[0].ToString() == "присказка");
     }
 
     [TestMethod]
-    public void GetRoot() {
-        Vocabulary vcb = new Vocabulary();
+    public async Task GetRoot() {
+        Vocabulary vcb = new Vocabulary(true);
+
         vcb.AddWord(
             new Word(
                 new WordPrefix("при"),
@@ -49,13 +52,14 @@ public class VocabularyTest {
             )
         );
 
-        string root = vcb.GetRoot("присказка");
+        string root = await vcb.GetRoot("присказка");
         Assert.IsTrue(root == "сказ");
     }
 
     [TestMethod]
-    public void GetKnownWords() {
-        Vocabulary vcb = new Vocabulary();
+    public async Task GetKnownWords() {
+        Vocabulary vcb = new Vocabulary(true);
+
         vcb.AddWord(
             new Word(
                 new WordPrefix("при"),
@@ -81,11 +85,11 @@ public class VocabularyTest {
             )
         );
 
-        Word[] words = vcb.GetKnownWords("сказ").ToArray();
+        Word[] words = await vcb.GetKnownWords("сказ");
 
         Assert.IsTrue(words.Length == 3);
-        Assert.IsTrue(words[0].ToString() == "сказ");
+        Assert.IsTrue(words[0].ToString() == "присказка");
         Assert.IsTrue(words[1].ToString() == "рассказ");
-        Assert.IsTrue(words[2].ToString() == "присказка");
+        Assert.IsTrue(words[2].ToString() == "сказ");
     }
 }

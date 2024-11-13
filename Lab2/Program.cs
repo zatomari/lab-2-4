@@ -3,13 +3,8 @@ using Lab2.Vocabulary;
 
 public class Program {
     public static async Task Main() {
-        VocabularyManager manager = new VocabularyManager();
-        Vocabulary vcb = new Vocabulary();
+        Vocabulary vocabulary = new Vocabulary();
 
-        await manager.Read(vcb);
-
-        new DialogMain(vcb).Run("");
-
-        await manager.Write(vcb);
+        await new DialogMain(vocabulary).Run("");
     }
 }
