@@ -16,10 +16,6 @@ public class Word : IComparable<Word> {
         this.ending = ending;
     }
 
-    public WordRoot GetRoot() {
-        return root;
-    }
-
     // приставка1-приставка2-корень-суффикс1-суффикс2-окончание
     public string Output() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -32,6 +28,7 @@ public class Word : IComparable<Word> {
         return stringBuilder.ToString();
     }
 
+    // Преобразование объекта слова в слово в формате БД
     public WordDb Serialize() {
         return new WordDb(
             prefix.Serialize(), // приставка1,приставка2
