@@ -2,12 +2,14 @@ namespace Lab2.Tests;
 
 using Lab2.Word;
 using Lab2.Vocabulary;
+using System.Data.Common;
 
 [TestClass]
 public class VocabularyTest {
+    private static string dbName = "TestDictionary.db";
     [TestMethod]
     public async Task Has() {
-        Vocabulary vcb = new Vocabulary(true);
+        Vocabulary vcb = new Vocabulary(dbName, true);
 
         vcb.AddWord(
             new Word(
@@ -23,7 +25,7 @@ public class VocabularyTest {
 
     [TestMethod]
     public async Task GetWords() {
-        Vocabulary vcb = new Vocabulary(true);
+        Vocabulary vcb = new Vocabulary(dbName, true);
 
         vcb.AddWord(
             new Word(
@@ -41,7 +43,7 @@ public class VocabularyTest {
 
     [TestMethod]
     public async Task GetRoot() {
-        Vocabulary vcb = new Vocabulary(true);
+        Vocabulary vcb = new Vocabulary(dbName, true);
 
         vcb.AddWord(
             new Word(
@@ -58,7 +60,7 @@ public class VocabularyTest {
 
     [TestMethod]
     public async Task GetKnownWords() {
-        Vocabulary vcb = new Vocabulary(true);
+        Vocabulary vcb = new Vocabulary(dbName, true);
 
         vcb.AddWord(
             new Word(

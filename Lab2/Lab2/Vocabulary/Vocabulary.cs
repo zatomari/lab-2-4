@@ -5,12 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 // Класс словаря
 public class Vocabulary {
-    private const string dbName = "Dictionary.db";
-
     private VocabularyContext context;
 
     // isClean = true, если нужно создать словарь с пустой базой (нужно для тестов)
-    public Vocabulary(bool isClean = false) {
+    public Vocabulary(string dbName, bool isClean = false) {
         context = new VocabularyContext(dbName);
 
         if (isClean) {
