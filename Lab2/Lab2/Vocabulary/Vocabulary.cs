@@ -26,19 +26,16 @@ public class Vocabulary {
     // Возвращает массив слов(объектов) с корнем root
     public async Task<Word[]> GetWords(string root) {
         // находим в БД все слова с переданным корнем root
-        var words = await context.Words.Where(w => w.Root == root).ToListAsync();
-        List<Word> result = new List<Word>();
-        // преобразовываем из слова из списка words в массив объектов Word
-        foreach (var wordDb in words) {
-            result.Add(new Word(
+        return (await context.Words
+            .Where(w => w.Root == root)
+            .Select(wordDb => new Word(
                 new WordPrefix(WordPart.Deserialize(wordDb.Prefix)),
                 new WordRoot(wordDb.Root),
                 new WordSuffix(WordPart.Deserialize(wordDb.Suffix)),
                 new WordEnding(wordDb.Ending)
-            ));
-        }
-
-        return result.ToArray();
+            ))
+            .ToListAsync())
+            .ToArray();
     }
 
     // Добавить слово в словарь
