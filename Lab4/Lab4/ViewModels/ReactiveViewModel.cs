@@ -1,4 +1,4 @@
-﻿namespace Lab4.ViewModels;
+namespace Lab4.ViewModels;
 
 using System.Collections;
 using System.ComponentModel;
