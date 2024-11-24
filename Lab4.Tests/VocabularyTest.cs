@@ -1,7 +1,7 @@
-namespace Lab2.Tests;
+namespace Lab4.Tests;
 
-using Lab2.Word;
-using Lab2.Vocabulary;
+using Lab4.Word;
+using Lab4.Vocabulary;
 using System.Data.Common;
 
 [TestClass]

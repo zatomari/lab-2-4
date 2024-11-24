@@ -1,4 +1,4 @@
-namespace Lab2.Input;
+namespace Lab4.Input;
 
 using System.Text.RegularExpressions;
 

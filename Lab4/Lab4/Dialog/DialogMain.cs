@@ -1,8 +1,8 @@
-namespace Lab2.Dialog;
+namespace Lab4.Dialog;
 
-using Lab2.Input;
-using Lab2.Vocabulary;
-using Lab2.Word;
+using Lab4.Input;
+using Lab4.Vocabulary;
+using Lab4.Word;
 
 // Класс основного диалога
 public class DialogMain : Dialog {
