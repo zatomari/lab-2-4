@@ -1,0 +1,56 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Lab4.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="800"
+    d:DesignHeight="450"
+    x:Class="Lab4.Views.MainWindow"
+    x:DataType="vm:MainWindowViewModel"
+    x:CompileBindings="True"
+    Title="Lab4">
+
+	<Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="Margin" Value="20 20 0 20" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+
+        <Style Selector="TextBox.Word">
+            <Setter Property="MinWidth" Value="200" />
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
+        <Style Selector="TextBox.KnownWords">
+            <Setter Property="Height" Value="200" />
+            <Setter Property="MinWidth" Value="200" />
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+	</Window.Styles>
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <StackPanel DataContext="{Binding ReactiveViewModel}">
+        <TextBox
+            Classes="Word"
+            Watermark="Введите русское слово"
+            Text="{Binding Word}"
+        />
+
+        <TextBlock
+            Classes="KnownWords"
+            Text="{Binding KnownWords}"
+        />
+    </StackPanel>
+
+</Window>

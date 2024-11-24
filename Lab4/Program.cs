@@ -1,10 +1,20 @@
-﻿using Lab4.Dialog;
-using Lab4.Vocabulary;
+using Avalonia;
+using Avalonia.ReactiveUI;
 
 public class Program {
-    public static async Task Main() {
-        Vocabulary vocabulary = new Vocabulary("Dictionary.db");
+    // Initialization code. Don't use any Avalonia, third-party APIs or any
+    // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
+    // yet and stuff might break.
+    [STAThread]
+    public static void Main(string[] args) {
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+    }
 
-        await new DialogMain(vocabulary).Run("");
+    // Avalonia configuration, don't remove; also used by visual designer.
+    public static AppBuilder BuildAvaloniaApp() {
+        return AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .LogToTrace()
+            .UseReactiveUI();
     }
 }
