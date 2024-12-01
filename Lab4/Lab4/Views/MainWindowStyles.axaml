@@ -1,0 +1,33 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="StackPanel">
+        <Setter Property="Margin" Value="20 20 20 20" />
+    </Style>
+
+    <Style Selector="Label">
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <Style Selector="TextBlock">
+        <Setter Property="Margin" Value="0 20 0 20" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="0 0 0 20" />
+    </Style>
+
+    <Style Selector="TextBox.Word">
+        <Setter Property="MinWidth" Value="50" />
+    </Style>
+
+    <Style Selector="TextBlock.KnownWords">
+        <Setter Property="Height" Value="200" />
+        <Setter Property="Padding" Value="10 0 0 0" />
+    </Style>
+
+</Styles>

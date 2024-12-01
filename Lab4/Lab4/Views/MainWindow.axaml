@@ -12,41 +12,28 @@
     x:CompileBindings="True"
     Title="Lab4">
 
-	<Window.Styles>
-        <Style Selector="TextBlock">
-            <Setter Property="Margin" Value="20 20 0 20" />
-            <Setter Property="FontSize" Value="20" />
-        </Style>
-
-        <Style Selector="TextBox">
-            <Setter Property="FontSize" Value="20" />
-        </Style>
-
-        <Style Selector="TextBox.Word">
-            <Setter Property="MinWidth" Value="200" />
-            <Setter Property="Margin" Value="20" />
-            <Setter Property="Padding" Value="10" />
-        </Style>
-
-        <Style Selector="TextBox.KnownWords">
-            <Setter Property="Height" Value="200" />
-            <Setter Property="MinWidth" Value="200" />
-            <Setter Property="Margin" Value="20" />
-            <Setter Property="Padding" Value="10" />
-        </Style>
-	</Window.Styles>
+    <Window.Styles>
+        <StyleInclude Source="MainWindowStyles.axaml"/>
+    </Window.Styles>
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <StackPanel DataContext="{Binding ReactiveViewModel}">
+    <StackPanel>
+        <Label
+            Classes="WordTitle"
+            Content="Введите русское слово:"
+        />
         <TextBox
             Classes="Word"
-            Watermark="Введите русское слово"
             Text="{Binding Word}"
         />
 
+        <Label
+            Classes="KnownWordsTitle"
+            Content="Известные однокоренные слова:"
+        />
         <TextBlock
             Classes="KnownWords"
             Text="{Binding KnownWords}"
