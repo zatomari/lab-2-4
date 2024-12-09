@@ -1,17 +1,24 @@
 namespace Lab4.ViewModels;
 
 using System.Text;
+using System.Text.RegularExpressions;
 using ReactiveUI;
 
 using Lab4.Vocabulary;
 using Lab4.Word;
 
 public class MainWindowViewModel : ReactiveObject {
+    private static Regex IsCyrillic = new Regex(@"[а-яА-Я]+");
+
     protected static Vocabulary vocabulary = new Vocabulary("Dictionary.db");
 
     public MainWindowViewModel() {
         // We can listen to any property changes with "WhenAnyValue"
         // and do whatever we want in "Subscribe".
+        this
+            .WhenAnyValue(o => o.Word)
+            .Subscribe(o => CheckRussian());
+
         this
             .WhenAnyValue(o => o.Word)
             .Subscribe(o => GetKnownWordsAsync());
@@ -28,6 +35,16 @@ public class MainWindowViewModel : ReactiveObject {
             // if the value changed and automatically notify the UI
             this.RaiseAndSetIfChanged(ref _Word, value);
         }
+    }
+
+    private void CheckRussian() {
+        if (_Word != null && _Word.Trim() != "" && !IsCyrillic.IsMatch(_Word)) {
+            _Error = "Введите русское слово";
+        } else {
+            _Error = "";
+        }
+
+        this.RaisePropertyChanged(nameof(Error));
     }
 
     private async void GetKnownWordsAsync() {
@@ -67,6 +84,14 @@ public class MainWindowViewModel : ReactiveObject {
     public string KnownWords {
         get {
             return _KnownWords;
+        }
+    }
+
+    private string _Error = "";
+
+    public string Error {
+        get {
+            return _Error;
         }
     }
 }

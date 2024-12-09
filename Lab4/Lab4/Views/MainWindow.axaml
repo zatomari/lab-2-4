@@ -20,24 +20,80 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <StackPanel>
-        <Label
-            Classes="WordTitle"
-            Content="Введите русское слово:"
-        />
-        <TextBox
-            Classes="Word"
-            Text="{Binding Word}"
-        />
+    <Grid ColumnDefinitions="*, *">
+        <StackPanel Classes="Word" Grid.Column="0">
+            <Label
+                Classes="WordTitle"
+                Content="Введите русское слово:"
+            />
+            <TextBox
+                Classes="Word"
+                Text="{Binding Word}"
+            />
+            <Label
+                Name="WordError"
+                Classes="WordError"
+                Content="{Binding Error}"
+            />
 
-        <Label
-            Classes="KnownWordsTitle"
-            Content="Известные однокоренные слова:"
-        />
-        <TextBlock
-            Classes="KnownWords"
-            Text="{Binding KnownWords}"
-        />
-    </StackPanel>
+            <Label
+                Classes="KnownWordsTitle"
+                Content="Известные однокоренные слова:"
+            />
+            <TextBlock
+                Classes="KnownWords"
+                Text="{Binding KnownWords}"
+            />
+        </StackPanel>
+
+        <StackPanel Classes="AddWord" Grid.Column="1">
+            <Label
+                Classes="AddWordTitle"
+                Content="Добавьте слово в словарь:"
+            />
+
+            <TextBox
+                Name="AddWordPrefix1"
+                Watermark="Приставка1"
+            />
+            <TextBox
+                Name="AddWordPrefix2"
+                Watermark="Приставка2"
+            />
+            <TextBox
+                Name="AddWordPrefix3"
+                Watermark="Приставка3"
+            />
+            <TextBox
+                Name="AddWordRoot"
+                Watermark="Корень"
+            />
+            <TextBox
+                Name="AddWordSuffix1"
+                Watermark="Суффикс1"
+            />
+            <TextBox
+                Name="AddWordSuffix2"
+                Watermark="Суффикс2"
+            />
+            <TextBox
+                Name="AddWordSuffix3"
+                Watermark="Суффикс3"
+            />
+            <TextBox
+                Name="AddWordSuffix4"
+                Watermark="Суффикс4"
+            />
+            <TextBox
+                Name="AddWordEnding"
+                Watermark="Окончание"
+            />
+
+            <!-- Command="{Binding AddWordCommand}" -->
+            <Button>
+                Добавить слово
+            </Button>
+        </StackPanel>
+    </Grid>
 
 </Window>
