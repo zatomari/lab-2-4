@@ -13,47 +13,49 @@ public class MainWindowViewModel : ReactiveObject {
     protected static Vocabulary vocabulary = new Vocabulary("Dictionary.db");
 
     public MainWindowViewModel() {
-        // We can listen to any property changes with "WhenAnyValue"
-        // and do whatever we want in "Subscribe".
+        // При изменении свойства "Word" ожидаем,
+        // изменения свойства "Error"
         this
             .WhenAnyValue(o => o.Word)
             .Subscribe(o => CheckRussian());
 
+        // При изменении свойства "Word" ожидаем,
+        // изменения свойства "KnownWords"
         this
             .WhenAnyValue(o => o.Word)
             .Subscribe(o => GetKnownWordsAsync());
     }
 
-    private string? _Word; // This is our backing field for Word
+    private string? _word;
 
     public string? Word {
         get {
-            return _Word;
+            return _word;
         }
         set {
-            // We can use "RaiseAndSetIfChanged" to check
-            // if the value changed and automatically notify the UI
-            this.RaiseAndSetIfChanged(ref _Word, value);
+            // Поверяем, что свойство "Word" изменилось,
+            // Уведомляем UI
+            this.RaiseAndSetIfChanged(ref _word, value);
         }
     }
 
     private void CheckRussian() {
-        if (_Word != null && _Word.Trim() != "" && !IsCyrillic.IsMatch(_Word)) {
-            _Error = "Введите русское слово";
+        if (_word != null && _word.Trim() != "" && !IsCyrillic.IsMatch(_word)) {
+            _error = "Введите русское слово";
         } else {
-            _Error = "";
+            _error = "";
         }
 
         this.RaisePropertyChanged(nameof(Error));
     }
 
     private async void GetKnownWordsAsync() {
-        string knownWords = await GetKnownWords();
+        string getKnownWords = await GetKnownWords();
 
-        if (_KnownWords != knownWords) {
-            _KnownWords = knownWords;
+        if (_knownWords != getKnownWords) {
+            _knownWords = getKnownWords;
 
-            // Уведомляем UI, что значение изменилось
+            // Уведомляем UI, что значение "KnownWords" изменилось
             this.RaisePropertyChanged(nameof(KnownWords));
         }
     }
@@ -78,20 +80,20 @@ public class MainWindowViewModel : ReactiveObject {
         return "однокоренных слов нет";
     }
 
-    private string _KnownWords = "";
+    private string _knownWords = "";
 
     // KnownWords will change based on a Word.
     public string KnownWords {
         get {
-            return _KnownWords;
+            return _knownWords;
         }
     }
 
-    private string _Error = "";
+    private string _error = "";
 
     public string Error {
         get {
-            return _Error;
+            return _error;
         }
     }
 }
