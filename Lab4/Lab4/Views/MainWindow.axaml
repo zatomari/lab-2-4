@@ -100,9 +100,9 @@
                 Text="{Binding Ending}"
             />
 
-            <!-- Command="{Binding AddWordCommand}" -->
             <Button
                 Classes="AddWordButton"
+                Command="{Binding AddWord}"
                 IsEnabled = "{Binding AddWordButtonEnabled}">
                 Добавить слово
             </Button>

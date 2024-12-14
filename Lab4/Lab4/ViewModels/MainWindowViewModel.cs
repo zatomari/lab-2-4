@@ -32,8 +32,8 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
-    private string? _word;
-    public string? Word {
+    private string _word = "";
+    public string Word {
         get => _word;
         set {
             this.RaiseAndSetIfChanged(ref _word, value);
@@ -42,11 +42,11 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
-    private string? _prefix1;
-    public string? Prefix1 {
-        get => _prefix1;
+    private string[] _prefix = ["", ""];
+    public string Prefix1 {
+        get => _prefix[0];
         set {
-            this.RaiseAndSetIfChanged(ref _prefix1, value);
+            this.RaiseAndSetIfChanged(ref _prefix[0], value);
 
             // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
             this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
@@ -55,11 +55,10 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
-    private string? _prefix2;
-    public string? Prefix2 {
-        get => _prefix2;
+    public string Prefix2 {
+        get => _prefix[1];
         set {
-            this.RaiseAndSetIfChanged(ref _prefix2, value);
+            this.RaiseAndSetIfChanged(ref _prefix[1], value);
 
             // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
             this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
@@ -68,8 +67,8 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
-    private string? _root;
-    public string? Root {
+    private string _root = "";
+    public string Root {
         get => _root;
         set {
             this.RaiseAndSetIfChanged(ref _root, value);
@@ -81,11 +80,11 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
-    private string? _suffix1;
-    public string? Suffix1 {
-        get => _suffix1;
+    private string[] _suffix = ["", "", ""];
+    public string Suffix1 {
+        get => _suffix[0];
         set {
-            this.RaiseAndSetIfChanged(ref _suffix1, value);
+            this.RaiseAndSetIfChanged(ref _suffix[0], value);
 
             // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
             this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
@@ -94,11 +93,10 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
-    private string? _suffix2;
-    public string? Suffix2 {
-        get => _suffix2;
+    public string Suffix2 {
+        get => _suffix[1];
         set {
-            this.RaiseAndSetIfChanged(ref _suffix2, value);
+            this.RaiseAndSetIfChanged(ref _suffix[1], value);
 
             // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
             this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
@@ -107,11 +105,10 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
-    private string? _suffix3;
-    public string? Suffix3 {
-        get => _suffix3;
+    public string Suffix3 {
+        get => _suffix[2];
         set {
-            this.RaiseAndSetIfChanged(ref _suffix3, value);
+            this.RaiseAndSetIfChanged(ref _suffix[2], value);
 
             // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
             this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
@@ -120,8 +117,8 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
-    private string? _ending;
-    public string? Ending {
+    private string _ending = "";
+    public string Ending {
         get => _ending;
         set {
             this.RaiseAndSetIfChanged(ref _ending, value);
@@ -135,13 +132,26 @@ public class MainWindowViewModel : ReactiveObject {
 
     public bool AddWordButtonEnabled {
         get => !string.IsNullOrWhiteSpace(_root) &&
-            IsValid(_prefix1) &&
-            IsValid(_prefix2) &&
+            IsValid(_prefix[0]) &&
+            IsValid(_prefix[1]) &&
             IsValid(_root) &&
-            IsValid(_suffix1) &&
-            IsValid(_suffix2) &&
-            IsValid(_suffix3) &&
+            IsValid(_suffix[0]) &&
+            IsValid(_suffix[1]) &&
+            IsValid(_suffix[2]) &&
             IsValid(_ending);
+    }
+
+    public void AddWord() {
+        vocabulary.AddWord(
+            new Word(
+                new WordPrefix(_prefix),
+                new WordRoot(_root),
+                new WordSuffix(_suffix),
+                new WordEnding(_ending)
+            )
+        );
+
+        GetKnownWordsAsync();
     }
 
     private async void GetKnownWordsAsync() {
