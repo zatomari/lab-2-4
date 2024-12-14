@@ -8,7 +8,7 @@ using Lab4.Vocabulary;
 using Lab4.Word;
 
 public class MainWindowViewModel : ReactiveObject {
-    private static Regex IsCyrillic = new Regex(@"[а-яА-Я]+");
+    private static Regex IsCyrillic = new Regex(@"^[а-яА-Я]+$");
 
     protected static Vocabulary vocabulary = new Vocabulary("Dictionary.db");
 
