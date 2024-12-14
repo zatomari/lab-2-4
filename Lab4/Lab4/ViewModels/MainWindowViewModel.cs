@@ -60,6 +60,9 @@ public class MainWindowViewModel : ReactiveObject {
         set {
             CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _root, value);
+
+            // Уведовляем кнопку добавления слова, что она должна поменять своё состояние
+            this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
         }
     }
 
@@ -97,6 +100,10 @@ public class MainWindowViewModel : ReactiveObject {
             CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _ending, value);
         }
+    }
+
+    public bool AddWordButtonEnabled {
+        get => !string.IsNullOrEmpty(_root);
     }
 
     private async void GetKnownWordsAsync() {
