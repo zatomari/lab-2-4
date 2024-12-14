@@ -21,8 +21,13 @@ public class MainWindowViewModel : ReactiveObject {
             .Subscribe(o => GetKnownWordsAsync());
     }
 
+    private bool IsValid(string? value) {
+        return string.IsNullOrWhiteSpace(value) ||
+            (!string.IsNullOrWhiteSpace(value) && IsCyrillic.IsMatch(value));
+    }
+
     private void CheckCyrillic(string? value) {
-        if (!string.IsNullOrEmpty(value) && !IsCyrillic.IsMatch(value)) {
+        if (!IsValid(value)) {
             throw new DataValidationException("Можно вводить только русские буквы");
         }
     }
@@ -31,8 +36,9 @@ public class MainWindowViewModel : ReactiveObject {
     public string? Word {
         get => _word;
         set {
-            CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _word, value);
+
+            CheckCyrillic(value);
         }
     }
 
@@ -40,8 +46,12 @@ public class MainWindowViewModel : ReactiveObject {
     public string? Prefix1 {
         get => _prefix1;
         set {
-            CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _prefix1, value);
+
+            // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
+            this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
+
+            CheckCyrillic(value);
         }
     }
 
@@ -49,8 +59,12 @@ public class MainWindowViewModel : ReactiveObject {
     public string? Prefix2 {
         get => _prefix2;
         set {
-            CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _prefix2, value);
+
+            // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
+            this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
+
+            CheckCyrillic(value);
         }
     }
 
@@ -58,11 +72,12 @@ public class MainWindowViewModel : ReactiveObject {
     public string? Root {
         get => _root;
         set {
-            CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _root, value);
 
-            // Уведовляем кнопку добавления слова, что она должна поменять своё состояние
+            // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
             this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
+
+            CheckCyrillic(value);
         }
     }
 
@@ -70,8 +85,12 @@ public class MainWindowViewModel : ReactiveObject {
     public string? Suffix1 {
         get => _suffix1;
         set {
-            CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _suffix1, value);
+
+            // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
+            this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
+
+            CheckCyrillic(value);
         }
     }
 
@@ -79,8 +98,12 @@ public class MainWindowViewModel : ReactiveObject {
     public string? Suffix2 {
         get => _suffix2;
         set {
-            CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _suffix2, value);
+
+            // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
+            this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
+
+            CheckCyrillic(value);
         }
     }
 
@@ -88,8 +111,12 @@ public class MainWindowViewModel : ReactiveObject {
     public string? Suffix3 {
         get => _suffix3;
         set {
-            CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _suffix3, value);
+
+            // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
+            this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
+
+            CheckCyrillic(value);
         }
     }
 
@@ -97,13 +124,24 @@ public class MainWindowViewModel : ReactiveObject {
     public string? Ending {
         get => _ending;
         set {
-            CheckCyrillic(value);
             this.RaiseAndSetIfChanged(ref _ending, value);
+
+            // Уведомляем кнопку добавления слова, что она должна поменять своё состояние
+            this.RaisePropertyChanged(nameof(AddWordButtonEnabled));
+
+            CheckCyrillic(value);
         }
     }
 
     public bool AddWordButtonEnabled {
-        get => !string.IsNullOrEmpty(_root);
+        get => !string.IsNullOrWhiteSpace(_root) &&
+            IsValid(_prefix1) &&
+            IsValid(_prefix2) &&
+            IsValid(_root) &&
+            IsValid(_suffix1) &&
+            IsValid(_suffix2) &&
+            IsValid(_suffix3) &&
+            IsValid(_ending);
     }
 
     private async void GetKnownWordsAsync() {
