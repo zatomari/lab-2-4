@@ -2,23 +2,11 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style Selector="Label">
-        <Setter Property="FontSize" Value="20" />
-    </Style>
-
-    <Style Selector="TextBlock">
-        <Setter Property="FontSize" Value="20" />
-    </Style>
-
-    <Style Selector="TextBox">
-        <Setter Property="FontSize" Value="20" />
-    </Style>
-
     <Style Selector="Button">
         <Setter Property="FontSize" Value="20" />
     </Style>
 
-    <Style Selector="StackPanel">
+    <Style Selector="StackPanel.Word, StackPanel.AddWord">
         <Setter Property="Margin" Value="20 20 20 20" />
     </Style>
 
@@ -26,26 +14,24 @@
         <Setter Property="MinWidth" Value="400" />
     </Style>
 
-    <Style Selector="Label">
-        <Setter Property="Padding" Value="0" />
-    </Style>
-
-    <Style Selector="Label.WordError">
-        <Setter Property="Foreground" Value="red" />
-    </Style>
-
     <Style Selector="Label.KnownWordsTitle">
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="Margin" Value="0 40 0 0" />
     </Style>
 
     <Style Selector="TextBlock.KnownWords">
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="Height" Value="200" />
-        <Setter Property="Margin" Value="0 20 0 20" />
+        <Setter Property="Margin" Value="5 20 5 20" />
     </Style>
 
     <Style Selector="Button.AddWordButton">
         <Setter Property="Margin" Value="0 20 0 0" />
         <Setter Property="Padding" Value="0 15 0 15" />
+    </Style>
+
+    <Style Selector="Label.AddWordTitle">
+        <Setter Property="FontSize" Value="20" />
     </Style>
 
 </Styles>

@@ -4,6 +4,7 @@
     xmlns:vm="using:Lab4.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpf="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
     mc:Ignorable="d"
     d:DesignWidth="800"
     d:DesignHeight="450"
@@ -22,18 +23,13 @@
 
     <Grid ColumnDefinitions="*, *">
         <StackPanel Classes="Word" Grid.Column="0">
-            <Label
-                Classes="WordTitle"
-                Content="Введите русское слово:"
-            />
             <TextBox
-                Classes="Word"
+                Classes="outline"
+                UseFloatingWatermark="True"
+                Theme="{StaticResource OutlineTextBox}"
+                wpf:TextFieldAssist.Label="Введите слово для поиска однокоренных"
+                wpf:TextFieldAssist.Hints=" "
                 Text="{Binding Word}"
-            />
-            <Label
-                Name="WordError"
-                Classes="WordError"
-                Content="{Binding Error}"
             />
 
             <Label
@@ -47,46 +43,61 @@
         </StackPanel>
 
         <StackPanel Classes="AddWord" Grid.Column="1">
-            <Label
-                Classes="AddWordTitle"
-                Content="Добавьте слово в словарь:"
-            />
-
             <TextBox
-                Name="AddWordPrefix1"
-                Watermark="Приставка1"
-            />
-            <TextBox
-                Name="AddWordPrefix2"
-                Watermark="Приставка2"
+                Classes="outline"
+                UseFloatingWatermark="True"
+                Theme="{StaticResource OutlineTextBox}"
+                wpf:TextFieldAssist.Label="Приставка1"
+                wpf:TextFieldAssist.Hints=" "
+                Text="{Binding Prefix1}"
             />
             <TextBox
-                Name="AddWordPrefix3"
-                Watermark="Приставка3"
+                Classes="outline"
+                UseFloatingWatermark="True"
+                Theme="{StaticResource OutlineTextBox}"
+                wpf:TextFieldAssist.Label="Приставка2"
+                wpf:TextFieldAssist.Hints=" "
+                Text="{Binding Prefix2}"
             />
             <TextBox
-                Name="AddWordRoot"
-                Watermark="Корень"
+                Classes="outline"
+                UseFloatingWatermark="True"
+                Theme="{StaticResource OutlineTextBox}"
+                wpf:TextFieldAssist.Label="Корень"
+                wpf:TextFieldAssist.Hints=" "
+                Text="{Binding Root}"
             />
             <TextBox
-                Name="AddWordSuffix1"
-                Watermark="Суффикс1"
+                Classes="outline"
+                UseFloatingWatermark="True"
+                Theme="{StaticResource OutlineTextBox}"
+                wpf:TextFieldAssist.Label="Суффикс1"
+                wpf:TextFieldAssist.Hints=" "
+                Text="{Binding Suffix1}"
             />
             <TextBox
-                Name="AddWordSuffix2"
-                Watermark="Суффикс2"
+                Classes="outline"
+                UseFloatingWatermark="True"
+                Theme="{StaticResource OutlineTextBox}"
+                wpf:TextFieldAssist.Label="Суффикс2"
+                wpf:TextFieldAssist.Hints=" "
+                Text="{Binding Suffix2}"
             />
             <TextBox
-                Name="AddWordSuffix3"
-                Watermark="Суффикс3"
+                Classes="outline"
+                UseFloatingWatermark="True"
+                Theme="{StaticResource OutlineTextBox}"
+                wpf:TextFieldAssist.Label="Суффикс3"
+                wpf:TextFieldAssist.Hints=" "
+                Text="{Binding Suffix3}"
             />
             <TextBox
-                Name="AddWordSuffix4"
-                Watermark="Суффикс4"
-            />
-            <TextBox
-                Name="AddWordEnding"
-                Watermark="Окончание"
+                Classes="outline"
+                UseFloatingWatermark="True"
+                Theme="{StaticResource OutlineTextBox}"
+                wpf:TextFieldAssist.Label="Окончание"
+                wpf:TextFieldAssist.Hints=" "
+                Text="{Binding Ending}"
             />
 
             <!-- Command="{Binding AddWordCommand}" -->
