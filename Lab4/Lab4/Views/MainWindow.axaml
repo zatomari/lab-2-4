@@ -90,7 +90,9 @@
             />
 
             <!-- Command="{Binding AddWordCommand}" -->
-            <Button IsEnabled = "False">
+            <Button
+                Classes="AddWordButton"
+                IsEnabled = "False">
                 Добавить слово
             </Button>
         </StackPanel>

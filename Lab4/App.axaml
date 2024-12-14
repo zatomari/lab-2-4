@@ -1,10 +1,15 @@
 <Application
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
     x:Class="App">
 
     <Application.Styles>
-        <FluentTheme />
+        <themes:MaterialTheme
+            BaseTheme="Light"
+            PrimaryColor="Blue"
+            SecondaryColor="Red"
+        />
     </Application.Styles>
 
 </Application>
