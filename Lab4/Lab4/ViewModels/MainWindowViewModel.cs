@@ -5,13 +5,12 @@ using System.Text.RegularExpressions;
 using ReactiveUI;
 using Avalonia.Data;
 
-using Lab4.Vocabulary;
+using Lab4.WebClient;
 using Lab4.Word;
 
 public class MainWindowViewModel : ReactiveObject {
+    private WebClient webClient = new WebClient();
     private static Regex IsCyrillic = new Regex(@"^[а-яА-Я]+$");
-
-    protected static Vocabulary vocabulary = new Vocabulary("Dictionary.db");
 
     public MainWindowViewModel() {
         // При изменении свойства "Word" ожидаем,
@@ -142,6 +141,7 @@ public class MainWindowViewModel : ReactiveObject {
     }
 
     public void AddWord() {
+/*
         vocabulary.AddWord(
             new Word(
                 new WordPrefix(_prefix),
@@ -150,7 +150,7 @@ public class MainWindowViewModel : ReactiveObject {
                 new WordEnding(_ending)
             )
         );
-
+*/
         GetKnownWordsAsync();
     }
 
@@ -170,12 +170,12 @@ public class MainWindowViewModel : ReactiveObject {
             return "введите слово в поле ввода";
         }
 
-        if (await vocabulary.Has(Word)) {
+        if (await webClient.Has(Word)) {
             StringBuilder result = new StringBuilder();
-            Word[] words = await vocabulary.GetKnownWords(Word);
+            string?[] words = await webClient.GetKnownWords(Word);
 
-            foreach (Word w in words) {
-                result.Append(w.Output());
+            foreach (string? w in words) {
+                result.Append(w);
                 result.Append("\n");
             }
 
