@@ -40,7 +40,7 @@ public class Vocabulary {
 
     // Добавить слово в словарь
     public async void AddWord(Word word) {
-        WordDb wordDb = word.Serialize();
+        WordDb wordDb = word.SerializeToWordDb();
         var existingWord = await context.Words.FirstOrDefaultAsync(w => w.Id == wordDb.Id);
 
         if (existingWord != null) {

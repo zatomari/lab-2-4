@@ -4,6 +4,8 @@ using System.Text;
 
 // Класс слова
 public class Word : IComparable<Word> {
+    private static readonly string PARTS_DELIMITER = ";";
+
     protected WordPrefix prefix;
     protected WordSuffix suffix;
     protected WordRoot root;
@@ -29,12 +31,37 @@ public class Word : IComparable<Word> {
     }
 
     // Преобразование объекта слова в слово в формате БД
-    public WordDb Serialize() {
+    public WordDb SerializeToWordDb() {
         return new WordDb(
             prefix.Serialize(), // приставка1,приставка2
             root.Serialize(),   // корень
             suffix.Serialize(), // суффикс1,суффикс2
             ending.Serialize()  // окончание
+        );
+    }
+
+    public string Serialize() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.Append(prefix.Serialize()); // приставка1,приставка2
+        stringBuilder.Append(PARTS_DELIMITER);
+        stringBuilder.Append(root.Serialize()); // корень
+        stringBuilder.Append(PARTS_DELIMITER);
+        stringBuilder.Append(suffix.Serialize()); // суффикс1,суффикс2
+        stringBuilder.Append(PARTS_DELIMITER);
+        stringBuilder.Append(ending.Serialize()); // окончание
+
+        return stringBuilder.ToString();
+    }
+
+    public static Word Deserialize(string input) {
+        string[] parts = input.Split(PARTS_DELIMITER);
+
+        return new Word(
+            new WordPrefix(WordPart.Deserialize(parts[0])),
+            new WordRoot(parts[1]),
+            new WordSuffix(WordPart.Deserialize(parts[2])),
+            new WordEnding(parts[3])
         );
     }
 

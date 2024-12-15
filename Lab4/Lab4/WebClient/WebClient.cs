@@ -37,4 +37,17 @@ public class WebClient {
         string json = await response.Content.ReadAsStringAsync();
         return JArray.Parse(json).Values<string>().ToArray();
     }
+
+    public async Task AddWord(Word word) {
+        var response = await client.GetAsync(
+            root + "/api/add-word?word=" + word.Serialize()
+        );
+
+        if (!response.IsSuccessStatusCode) {
+            Console.WriteLine($"Error: {response.StatusCode}");
+
+            // TODO: process error
+            return;
+        }
+    }
 }

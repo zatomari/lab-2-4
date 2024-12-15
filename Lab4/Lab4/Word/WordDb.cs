@@ -11,7 +11,7 @@ public class WordDb {
     public string Suffix { get; set; }
     public string Ending { get; set; }
 
-    public WordDb(string prefix, String root, String suffix, String ending) {
+    public WordDb(string prefix, string root, string suffix, string ending) {
         // Id -- собранное полностью слово
         Id = prefix.Replace(",", "") + root + suffix.Replace(",", "") + ending;
 

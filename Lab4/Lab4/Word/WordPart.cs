@@ -30,11 +30,16 @@ public abstract class WordPart {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < part.Length; i++) {
+            if (part[i] == "") {
+                continue;
+            }
+
             if (i != 0) {
                 stringBuilder.Append(PARTS_DELIMITER);
             }
             stringBuilder.Append(part[i]);
         }
+
         return stringBuilder.ToString();
     }
 

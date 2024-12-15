@@ -22,6 +22,7 @@ public class WebApp {
         InitHas();
         InitGetWords();
         InitGetKnownWords();
+        InitAddWord();
     }
 
     // Запускаем сервер
@@ -64,7 +65,6 @@ public class WebApp {
         });
     }
 
-
     // Метод GetKnownWords через REST
     private void InitGetKnownWords() {
         // /api/known-words?word=слово
@@ -77,6 +77,14 @@ public class WebApp {
             }
 
             return Results.Json(result);
+        });
+    }
+
+    // Метод AddWord через REST
+    private void InitAddWord() {
+        // /api/add-word
+        app.MapGet("/api/add-word", (string word) => {
+            vcb.AddWord(Word.Deserialize(word));
         });
     }
 }

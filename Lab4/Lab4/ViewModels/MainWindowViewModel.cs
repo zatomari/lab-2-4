@@ -140,17 +140,16 @@ public class MainWindowViewModel : ReactiveObject {
             IsValid(_ending);
     }
 
-    public void AddWord() {
-/*
-        vocabulary.AddWord(
-            new Word(
-                new WordPrefix(_prefix),
-                new WordRoot(_root),
-                new WordSuffix(_suffix),
-                new WordEnding(_ending)
-            )
+    public async void AddWord() {
+        Word word = new Word(
+            new WordPrefix(_prefix),
+            new WordRoot(_root),
+            new WordSuffix(_suffix),
+            new WordEnding(_ending)
         );
-*/
+
+        await webClient.AddWord(word);
+
         GetKnownWordsAsync();
     }
 

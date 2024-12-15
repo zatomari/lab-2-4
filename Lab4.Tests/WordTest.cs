@@ -68,7 +68,7 @@ public class WordTest {
     }
 
     [TestMethod]
-    public void WordSerialize() {
+    public void WordSerializeToWordDb() {
         Assert.AreEqual(
             new WordDb(
                 "пере,при",
@@ -81,7 +81,7 @@ public class WordTest {
                 new WordRoot("сказ"),
                 new WordSuffix("к"),
                 new WordEnding("а")
-            ).Serialize().ToString()
+            ).SerializeToWordDb().ToString()
         );
 
         Assert.AreEqual(
@@ -96,7 +96,7 @@ public class WordTest {
                 new WordRoot("сказ"),
                 new WordSuffix(["оч", "н", "ик"]),
                 new WordEnding()
-            ).Serialize().ToString()
+            ).SerializeToWordDb().ToString()
         );
 
         Assert.AreEqual(
@@ -111,7 +111,7 @@ public class WordTest {
                 new WordRoot("сказ"),
                 new WordSuffix("к"),
                 new WordEnding("а")
-            ).Serialize().ToString()
+            ).SerializeToWordDb().ToString()
         );
 
         Assert.AreEqual(
@@ -126,7 +126,7 @@ public class WordTest {
                 new WordRoot("сказ"),
                 new WordSuffix(),
                 new WordEnding()
-            ).Serialize().ToString()
+            ).SerializeToWordDb().ToString()
         );
 
         Assert.AreEqual(
@@ -141,7 +141,7 @@ public class WordTest {
                 new WordRoot("сказ"),
                 new WordSuffix(),
                 new WordEnding("ы")
-            ).Serialize().ToString()
+            ).SerializeToWordDb().ToString()
         );
     }
 }
