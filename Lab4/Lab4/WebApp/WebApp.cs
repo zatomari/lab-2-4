@@ -83,7 +83,10 @@ public class WebApp {
     // Метод AddWord через REST
     private void InitAddWord() {
         // /api/add-word
-        app.MapGet("/api/add-word", (string word) => {
+        app.MapPost("/api/add-word", async (HttpContext httpContext) => {
+            using StreamReader reader = new StreamReader(httpContext.Request.Body);
+            string word = await reader.ReadToEndAsync();
+
             vcb.AddWord(Word.Deserialize(word));
         });
     }

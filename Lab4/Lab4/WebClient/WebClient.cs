@@ -43,8 +43,9 @@ public class WebClient {
     }
 
     public async Task AddWord(Word word) {
-        var response = await client.GetAsync(
-            root + "/api/add-word?word=" + word.Serialize()
+        var response = await client.PostAsync(
+            root + "/api/add-word",
+            new StringContent(word.Serialize())
         );
 
         if (!response.IsSuccessStatusCode) {
