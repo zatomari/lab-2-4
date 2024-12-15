@@ -31,6 +31,8 @@ public class WebClient {
         var response = await client.GetAsync(root + "/api/known-words?word=" + word);
 
         if (!response.IsSuccessStatusCode) {
+            Console.WriteLine($"Error: {response.StatusCode}");
+
             return [$"Error: {response.StatusCode}"];
         }
 
