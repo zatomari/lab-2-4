@@ -37,6 +37,8 @@ public class WebClient {
         }
 
         string json = await response.Content.ReadAsStringAsync();
+
+        // https://stackoverflow.com/questions/31618238/how-do-i-convert-a-string-containing-an-array-to-an-array-in-c-sharp
         return JArray.Parse(json).Values<string>().ToArray();
     }
 
