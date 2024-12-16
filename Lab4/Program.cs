@@ -10,6 +10,8 @@ public class Program {
     // yet and stuff might break.
     [STAThread]
     public static void Main(string[] args) {
+        // Запускаем словарь и веб-приложение в отдельный поток,
+        // иначе почему-то Avalonia не запускается
         Task.Run(() => {
             Vocabulary vocabulary = new Vocabulary("Dictionary.db");
             WebApp webapp = new WebApp(vocabulary);

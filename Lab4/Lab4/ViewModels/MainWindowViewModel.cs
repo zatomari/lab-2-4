@@ -20,6 +20,10 @@ public class MainWindowViewModel : ReactiveObject {
             .Subscribe(o => GetKnownWordsAsync());
     }
 
+    // Свойство проверки введёенного текста на правильность.
+    // Введенный текст считается правильным, если он:
+    // 1) пустой или состоит из пробелов
+    // 2) не пустой и состоит из русских букв
     private bool IsValid(string? value) {
         return string.IsNullOrWhiteSpace(value) ||
             (!string.IsNullOrWhiteSpace(value) && IsCyrillic.IsMatch(value));
@@ -129,6 +133,7 @@ public class MainWindowViewModel : ReactiveObject {
         }
     }
 
+    // Метод проверяет можно ли разблокировать кнопку добавления слова
     public bool AddWordButtonEnabled {
         get => !string.IsNullOrWhiteSpace(_root) &&
             IsValid(_prefix[0]) &&
